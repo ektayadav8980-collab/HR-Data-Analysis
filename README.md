@@ -640,6 +640,8 @@ plt.tight_layout()
 plt.savefig('turnover_by_department.png', dpi=300, bbox_inches='tight')
 plt.show()
 ```
+<img width="1189" height="689" alt="Employee Turnover Rate by Department" src="https://github.com/user-attachments/assets/7bac1eae-a796-4ffe-b2d0-13279420f59c" />
+
 
 ### Employee Demographics Analysis (Age & Tenure)
 To analyzed employee demographics by visualizing age and tenure distributions, which helped identify a young workforce and potential early-stage attrition risk
@@ -675,9 +677,11 @@ plt.tight_layout()
 plt.savefig('age_tenure_distribution.png', dpi=300, bbox_inches='tight')
 plt.show()
 ```
+<img width="1389" height="590" alt="Employee Age and Tenure Distribution" src="https://github.com/user-attachments/assets/26a1aa6b-59b7-4307-a0c9-a4fa1ad659aa" />
 
 ### Employee Engagement vs Satisfaction Analysis
 I analyzed the relationship between engagement and satisfaction using scatter plots and correlation, which clearly showed that low engagement is strongly associated with higher attrition
+```Python
 # Create figure
 fig, ax = plt.subplots(figsize=(12, 8))
 
@@ -716,9 +720,13 @@ ax.text(0.98, 0.02, f'Correlation: {corr:.3f}', transform=ax.transAxes,
 plt.tight_layout()
 plt.savefig('engagement_vs_satisfaction.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1189" height="789" alt="Employee Engagement vs Satisfaction" src="https://github.com/user-attachments/assets/abaedf1c-3f0c-430a-8cdf-635fc9cdfc66" />
+
 ### Employee Status & Termination Analysis
 
 This visualization provides insights into the current workforce composition and termination patterns within the organization.
+```Python
 # Calculate distributions
 status_dist = df['EmployeeStatus'].value_counts()
 terminated_df = df[df['ExitDate'].notna()]
@@ -758,15 +766,20 @@ ax2.set_title('Termination Type Distribution', fontsize=12, fontweight='bold')
 plt.tight_layout()
 plt.savefig('employee_status_distribution.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1343" height="590" alt="Termination Type   status" src="https://github.com/user-attachments/assets/02682746-9bd1-46e2-9cfc-f6624eda8a3f" />
+
 The analysis includes two pie charts:
 
 1. Employee Status Distribution:
 Shows the proportion of employees by current status (e.g., Active, Terminated, Leave).
 2. Termination Type Distribution:
 Displays the breakdown of termination reasons (only for employees who have exited).
+
 ### Employee Performance by Department
 
 This analysis explores how employee performance ratings vary across departments, helping identify patterns, inconsistencies, and potential areas for improvement.
+```Python
 # Filter to numeric ratings only
 df['Current Employee Rating'] = pd.to_numeric(df['Current Employee Rating'], errors='coerce')
 
@@ -801,11 +814,15 @@ for i, (dept, median) in enumerate(medians.items()):
 plt.tight_layout()
 plt.savefig('performance_by_department.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1189" height="690" alt="Employee Performance Ratings By Department" src="https://github.com/user-attachments/assets/a16a9b9c-f904-4765-8d18-584b504b38c4" />
+
 The visualization combines:
 1. Box Plot → Shows distribution (median, quartiles, spread)
 2. Strip Plot Overlay → Displays individual employee ratings
 
 This hybrid approach gives both statistical summary + raw data visibility.
+
 ### HR Metrics Heatmap by Department
 
 This visualization provides a high-level comparison of key HR metrics across departments using a color-coded heatmap. It helps quickly identify strong vs weak areas in the organization.
@@ -819,6 +836,7 @@ Overview: The heatmap combines multiple metrics into a single view
 
 Each value is:
 Normalized (0–1) → for color scaling and Annotated with actual values → for precise interpretation
+```Python
 # Select top 10 departments
 top_depts = df['DepartmentType'].value_counts().head(10).index
 dept_data = df[df['DepartmentType'].isin(top_depts)].copy()
@@ -853,14 +871,19 @@ plt.yticks(rotation=0)
 plt.tight_layout()
 plt.savefig('hr_metrics_heatmap.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1120" height="790" alt="HR Metrice Heatmap By Department" src="https://github.com/user-attachments/assets/85211491-9fa9-4d0b-88af-cee4ea00aca6" />
+
 ### Why This Is Powerful
 Instead of looking at metrics individually, this heatmap lets you:
 
 1. See patterns instantly
 2. Compare departments side-by-side
 3. Make data-driven HR decisions faster
+
 ### Employee Turnover Trend Analysis
 This visualization tracks employee terminations over time, helping identify patterns, spikes, and long-term attrition trends.
+```Python
 # Extract year from exit date
 df['ExitDate'] = pd.to_datetime(df['ExitDate'], errors='coerce')
 df['Exit_Year'] = df['ExitDate'].dt.year
@@ -900,12 +923,16 @@ ax.set_xticks(turnover_by_year.index)
 plt.tight_layout()
 plt.savefig('turnover_trend.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1189" height="689" alt="Employee Turnover Trend Over Time" src="https://github.com/user-attachments/assets/cae9b4c3-479a-4e0f-bd97-979f5884fe42" />
+
 ### Why This Matters
 
 Understanding turnover trends helps organizations
 1. Reduce unexpected employee loss
 2. Improve retention strategies
 3. Align HR policies with workforce stability
+
 ### Termination Analysis by Department
 
 This visualization explores how employee terminations vary across departments, broken down by termination type. It helps HR teams understand where and why employees are leaving.
@@ -917,6 +944,7 @@ Overview:The chart uses a stacked bar plot to show
 3. Different colors representing termination types
 
 This allows easy comparison of both volume and composition of exits.
+```Python
 # Create cross-tabulation
 termination_by_dept = pd.crosstab(df['DepartmentType'], df['TerminationType'])
 
@@ -949,6 +977,8 @@ ax.set_axisbelow(True)
 plt.tight_layout()
 plt.savefig('termination_by_department.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1189" height="690" alt="Termination Types by Department" src="https://github.com/user-attachments/assets/c4ad1047-f2dd-4637-8570-5eafc73e725e" />
 
 
 ### Training Program Effectiveness Analysis
@@ -956,6 +986,7 @@ plt.show()
 This visualization evaluates the success rates of training programs, helping identify which programs deliver the best outcomes for employees.
 
 Each program is ranked and visualized using a horizontal bar chart with a performance-based.
+```Python
 # Training success by program
 training_data = df[df['Training Program Name'].notna()].copy()
 
@@ -988,6 +1019,9 @@ ax.set_xlim(0, 105)
 plt.tight_layout()
 plt.savefig('training_effectiveness.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1190" height="689" alt="Top 10 training Programs By Success Rate" src="https://github.com/user-attachments/assets/2ac173ac-3578-4d2e-acc7-96c493539850" />
+
 ### Employee Status Visualization (HR Color Scheme)
 
 This visualization highlights the distribution of employee statuses using a consistent and intuitive HR-focused color scheme.
@@ -1000,7 +1034,9 @@ Why This Matters:
 1. Improves readability & interpretation
 2. Creates visual consistency across reports
 3. Helps stakeholders quickly identify key patterns
+4. 
 # Color scheme for HR dashboards
+```Python
 # Define colors
 hr_colors = {'active': '#2ECC71', 'terminated': '#E74C3C', 'good': '#3498DB'}
 
@@ -1018,9 +1054,13 @@ plt.xticks(rotation=45, ha='right')
 plt.bar(status_data.index, status_data.values, color=colors)
 plt.title('Employee Status')
 plt.show()
+```
+<img width="561" height="540" alt="Employee status" src="https://github.com/user-attachments/assets/abe2b5a3-a164-44ee-a4fa-8e235068968b" />
+
 ### HR At-Risk Employee Dashboard
 
 This dashboard identifies employees at risk of attrition using engagement, satisfaction, and performance data. It helps HR teams take proactive action before employees leave.
+```Python
 # Create risk score
 df['Risk_Score'] = 0
 df.loc[df['Engagement Score'] <= 2, 'Risk_Score'] += 3
@@ -1086,6 +1126,9 @@ ax5.text(0.1, 0.5, stats_text, fontsize=10, verticalalignment='center',
 plt.suptitle('HR AT-RISK EMPLOYEE DASHBOARD', fontsize=16, fontweight='bold', y=0.98)
 plt.savefig('hr_at_risk_dashboard.png', dpi=300, bbox_inches='tight')
 plt.show()
+```
+<img width="1418" height="933" alt="HR AT-Risk Employee DashBoard" src="https://github.com/user-attachments/assets/b84a265f-6855-4d5f-ac16-8cbeaed48bb3" />
+
 The dashboard combines multiple visualizations to provide a 360° view of employee risk:
 
 1. Risk score distribution
